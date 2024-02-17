@@ -15,6 +15,8 @@ public class SliderController : MonoBehaviour
     public GameObject AIFindingPanel;
     public GameObject ResearchPanel;
     public GameObject ResearchSubnodes;
+    public GameObject ResearchSubnodeText;
+    public GameObject ResearchCreationCorrection;
     public GameObject CreationSubnodes;
     public GameObject CreationText;
     public AudioSource audioSource;
@@ -40,6 +42,7 @@ public class SliderController : MonoBehaviour
             audioSource.PlayOneShot(clip);
             CreationSubnodes.SetActive(true);
             CreationText.SetActive(true);
+            ResearchCreationCorrection.SetActive(true);
         }
     }
 
@@ -56,6 +59,7 @@ public class SliderController : MonoBehaviour
             {
                 ResearchPanel.SetActive(true);
                 ResearchSubnodes.SetActive(true);
+                ResearchSubnodeText.SetActive(true);
                 yield return new WaitForSeconds(5);
                 progress++;
                 slider.GetComponent<RectTransform>().localPosition = new Vector3(5.7f,41.7f,0f);
