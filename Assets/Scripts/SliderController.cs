@@ -32,7 +32,7 @@ public class SliderController : MonoBehaviour
 
         if (progress == 1000)
         {
-            Debug.Log("IN");
+            //Debug.Log("IN");
             check.SetActive(true);
             text.SetActive(false);
             text2.SetActive(true);
@@ -66,7 +66,7 @@ public class SliderController : MonoBehaviour
             {
                 progress++;
                 slider.value = progress;
-                Debug.Log(progress);
+                //Debug.Log(progress);
                 yield return new WaitForSeconds(1);
             }
         }
