@@ -5,11 +5,14 @@ using System;
 using System.Net;
 using System.Threading;
 using System.IO;
+using TMPro;
 
 public class SimpleHttpServer : MonoBehaviour
 {
     private HttpListener listener;
     private Thread listenerThread;
+    public GameObject selectMode;
+    private string postData = "default";
 
     void Start()
     {
@@ -19,6 +22,10 @@ public class SimpleHttpServer : MonoBehaviour
         listenerThread = new Thread(StartListener);
         listenerThread.Start();
         Debug.Log("Server started.");
+        TextMeshPro poptext = selectMode.GetComponent<TextMeshPro>();
+        poptext.text = postData;
+        
+
     }
 
     private void StartListener()
@@ -35,10 +42,21 @@ public class SimpleHttpServer : MonoBehaviour
                 //if (request.HttpMethod == "POST")
                 //{
                 // Process POST data
-                string postData;
+                //string postData;
                 using (var reader = new StreamReader(request.InputStream, request.ContentEncoding))
                 {
                     postData = reader.ReadToEnd();
+                    TextMeshPro poptext = selectMode.GetComponent<TextMeshPro>();
+
+                    if (postData != null)
+                    {
+                        poptext.text = postData;
+                    }
+                    else
+                    {
+                        poptext.text = "no data";
+                    }
+
 
                 }
 
@@ -68,7 +86,7 @@ public class SimpleHttpServer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //TODO implement later
+        
     }
 
     void OnApplicationQuit()
