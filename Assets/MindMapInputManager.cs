@@ -14,6 +14,7 @@ public class MindMapInputManager : MonoBehaviour
     public GameObject communicationSubNodes;
     public GameObject SchedulingSubNodes;
 
+
     void OnEnable()
     {
         // enable enhanced touch support to use active touches for properly pooling input phases

@@ -14,7 +14,6 @@ public class SimpleHttpServer : MonoBehaviour
     void Start()
     {
         listener = new HttpListener();
-        // listener.Prefixes.Add("http://10.19.179.160:8080/"); //URL to listen to
         listener.Prefixes.Add("http://*:8080/");
         listener.Start();
         listenerThread = new Thread(StartListener);
@@ -47,7 +46,6 @@ public class SimpleHttpServer : MonoBehaviour
                 Stream output = response.OutputStream;
                 output.Write(buffer, 0, buffer.Length);
 
-                // Close the output stream.
                 output.Close();
             }
             catch (Exception ex)
@@ -59,8 +57,35 @@ public class SimpleHttpServer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //TODO implement later
     }
+    void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            // App is suspended, stop the server
+            if (listener != null)
+            {
+                listener.Stop();
+                listener.Close();
+            }
+        }
+        else
+        {
+            // App is resumed, restart the server
+            StartServer();
+        }
+    }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            // App has regained focus, restart the server if it's not already running
+            StartServer();
+        }
+    }
+
 
     void OnApplicationQuit()
     {
@@ -76,5 +101,24 @@ public class SimpleHttpServer : MonoBehaviour
     {
         var allowedIPs = new List<string> { "127.0.0.1", "your_allowed_ip_here" };
         return allowedIPs.Contains(ipAddress);
+    }
+    void StartServer()
+    {
+        if (listener == null || !listener.IsListening)
+        {
+            listener = new HttpListener();
+            listener.Prefixes.Add("http://*:8080/");
+            try
+            {
+                listener.Start();
+                listenerThread = new Thread(StartListener);
+                listenerThread.Start();
+                Debug.Log("Server restarted successfully.");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to start server: {ex.Message}");
+            }
+        }
     }
 }
