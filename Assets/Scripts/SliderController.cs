@@ -13,6 +13,8 @@ public class SliderController : MonoBehaviour
     public GameObject text;
     public GameObject text2;
     public GameObject AIFindingPanel;
+    public GameObject ResearchPanel;
+    public GameObject ResearchSubnodes;
     public AudioSource audioSource;
     public AudioClip clip;
     int sec = 1;
@@ -48,7 +50,8 @@ public class SliderController : MonoBehaviour
         {
             if (progress == 500)
             {
-                sec = 5;
+                ResearchPanel.SetActive(true);
+                ResearchSubnodes.SetActive(true);
                 yield return new WaitForSeconds(5);
                 progress++;
                 slider.GetComponent<RectTransform>().localPosition = new Vector3(5.7f,41.7f,0f);
