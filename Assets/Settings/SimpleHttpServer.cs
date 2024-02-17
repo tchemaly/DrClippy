@@ -12,6 +12,8 @@ public class SimpleHttpServer : MonoBehaviour
     private HttpListener listener;
     private Thread listenerThread;
     public GameObject selectMode;
+    public GameObject level1;
+    public GameObject level2;
     private string postData = "default";
 
     void Start()
@@ -24,7 +26,7 @@ public class SimpleHttpServer : MonoBehaviour
         Debug.Log("Server started.");
         TextMeshPro poptext = selectMode.GetComponent<TextMeshPro>();
         poptext.text = postData;
-        
+
 
     }
 
@@ -51,6 +53,7 @@ public class SimpleHttpServer : MonoBehaviour
                     if (postData != null)
                     {
                         poptext.text = postData;
+                        level1.SetActive(true);
                     }
                     else
                     {
@@ -86,7 +89,7 @@ public class SimpleHttpServer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnApplicationQuit()
