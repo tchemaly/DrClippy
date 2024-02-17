@@ -47,6 +47,7 @@ public class SimpleHttpServer : MonoBehaviour
                 Stream output = response.OutputStream;
                 output.Write(buffer, 0, buffer.Length);
 
+                // Close the output stream.
                 output.Close();
             }
             catch (Exception ex)
@@ -58,35 +59,8 @@ public class SimpleHttpServer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (listener != null && !listener.IsListening)
-        {
-            Debug.LogWarning("Server stopped unexpectedly. Attempting to restart...");
 
-            try
-            {
-                listener.Close();
-
-                // Create a new HttpListener instance and start it as before
-                listener = new HttpListener();
-                listener.Prefixes.Add("http://*:8080/");
-                listener.Start();
-
-                // Also, you might need to restart the listener thread
-                if (listenerThread != null && !listenerThread.IsAlive)
-                {
-                    listenerThread = new Thread(StartListener);
-                    listenerThread.Start();
-                }
-
-                Debug.Log("Server restarted successfully.");
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"Failed to restart server: {ex.Message}");
-            }
-        }
     }
-
 
     void OnApplicationQuit()
     {
