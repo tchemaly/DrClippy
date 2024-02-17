@@ -9,6 +9,10 @@ public class MindMapInputManager : MonoBehaviour
 {
     [SerializeField]
     Transform m_InputAxisTransform;
+    public GameObject researchSubNodes;
+    public GameObject creationSubNodes;
+    public GameObject communicationSubNodes;
+    public GameObject SchedulingSubNodes;
 
     void OnEnable()
     {
