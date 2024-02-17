@@ -5100,7 +5100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33acc3b6f04fc124fa646203f42ed25f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Dimensions: {x: 2.7, y: 1, z: 1}
+  m_Dimensions: {x: 2.7, y: 2.7, z: 2.7}
   m_IsUniformScale: 0
   m_OutputConfiguration: {fileID: 11400000, guid: c141c6d819fe54420b1c524360b3915b,
     type: 2}
@@ -11031,7 +11031,7 @@ GameObject:
   - component: {fileID: 7388509569696039318}
   - component: {fileID: 7388509569696039317}
   m_Layer: 0
-  m_Name: ProductivityMode
+  m_Name: ProfileNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
