@@ -42,13 +42,7 @@ public class MindMapInputManager : MonoBehaviour
                     {
                         //Debug.Log("a node has been clicked");
                         //Debug.Log(nodeObject.gameObject.name);
-                        if (nodeObject.gameObject.name == "ProfileImage" || nodeObject.gameObject.name == "ProfileNode")
-                        {
-                            Debug.Log("entertainment mode");
-
-
-                        }
-                        else if (nodeObject.gameObject.name == "ResearchIcon" || nodeObject.gameObject.name == "ResearchNode")
+                         if (nodeObject.gameObject.name == "ResearchIcon" || nodeObject.gameObject.name == "ResearchNode")
                         {
                             Debug.Log("research mode");
                        
