@@ -28,25 +28,35 @@ public class SimpleHttpServer : MonoBehaviour
             try
             {
                 var context = listener.GetContext();
+                var request = context.Request;
                 var response = context.Response;
 
-                /** AUTHENTICATION
-                var requestIP = context.Request.RemoteEndPoint.Address.ToString();
-                if (!IsAllowedIP(requestIP))
+                // Check if the request is a POST method
+                //if (request.HttpMethod == "POST")
+                //{
+                // Process POST data
+                string postData;
+                using (var reader = new StreamReader(request.InputStream, request.ContentEncoding))
                 {
-                    context.Response.StatusCode = 403; // Forbidden
-                    context.Response.OutputStream.Close();
-                    continue;
-                } */
+                    postData = reader.ReadToEnd();
 
-                string responseString = "<HTML><BODY> Hello world!</BODY></HTML>";
+                }
+
+                // Customize response to include the POST data received
+                string responseString = $"<HTML><BODY>Your request was: {System.Net.WebUtility.HtmlEncode(postData)}</BODY></HTML>";
                 var buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
 
                 response.ContentLength64 = buffer.Length;
                 Stream output = response.OutputStream;
                 output.Write(buffer, 0, buffer.Length);
-
                 output.Close();
+                /**}
+                else
+                {
+                    // Handle other types of requests or send a 405 Method Not Allowed response
+                    response.StatusCode = 405; // Method Not Allowed
+                    response.OutputStream.Close();
+                }*/
             }
             catch (Exception ex)
             {
@@ -54,38 +64,12 @@ public class SimpleHttpServer : MonoBehaviour
             }
         }
     }
+
     // Update is called once per frame
     void Update()
     {
         //TODO implement later
     }
-    void OnApplicationPause(bool pauseStatus)
-    {
-        if (pauseStatus)
-        {
-            // App is suspended, stop the server
-            if (listener != null)
-            {
-                listener.Stop();
-                listener.Close();
-            }
-        }
-        else
-        {
-            // App is resumed, restart the server
-            StartServer();
-        }
-    }
-
-    void OnApplicationFocus(bool hasFocus)
-    {
-        if (hasFocus)
-        {
-            // App has regained focus, restart the server if it's not already running
-            StartServer();
-        }
-    }
-
 
     void OnApplicationQuit()
     {
