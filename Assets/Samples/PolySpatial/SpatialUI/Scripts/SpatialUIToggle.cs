@@ -4,6 +4,9 @@ namespace PolySpatial.Samples
 {
     public class SpatialUIToggle : SpatialUI
     {
+        public GameObject Productivity;
+        public GameObject Entertainment;
+
         public bool Active => m_Active;
 
         [SerializeField]
@@ -45,6 +48,16 @@ namespace PolySpatial.Samples
             var lerpPercentage = coveredAmount / (k_BubbleOffPosition * 2);
             m_ToggleBubble.localPosition = Vector3.Lerp(m_Active ? m_BubbleOffTargetPosition : m_BubbleOnTargetPosition,
                 m_Active ? m_BubbleOnTargetPosition : m_BubbleOffTargetPosition, lerpPercentage);
+
+            if(m_Active){
+              Productivity.SetActive(false);
+              Entertainment.SetActive(true);
+            }
+
+            else{
+              Productivity.SetActive(true);
+              Entertainment.SetActive(false);
+            }
         }
     }
 }
