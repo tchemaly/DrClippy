@@ -15,7 +15,7 @@ namespace PolySpatial.Samples
         [SerializeField]
         MeshRenderer m_ToggleBackground;
 
-        bool m_Active = true;
+        bool m_Active = false;
         Vector3 m_BubbleTargetPosition;
         Vector3 m_BubbleOnTargetPosition;
         Vector3 m_BubbleOffTargetPosition;
