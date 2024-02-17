@@ -44,19 +44,26 @@ public class MindMapInputManager : MonoBehaviour
                         if (nodeObject.gameObject.name == "ProfileImage" || nodeObject.gameObject.name == "ProfileNode")
                         {
                             Debug.Log("entertainment mode");
+
+
                         }
                         else if (nodeObject.gameObject.name == "ResearchIcon" || nodeObject.gameObject.name == "ResearchNode")
                         {
                             Debug.Log("research mode");
+                       
+                            researchSubNodes.SetActive(!researchSubNodes.activeSelf);
                         }
                         else if (nodeObject.gameObject.name == "CreationIcon" || nodeObject.gameObject.name == "CreationNode")
                         {
                             Debug.Log("Creation mode");
+                            creationSubNodes.SetActive(!creationSubNodes.activeSelf);
                         }
                         else if (nodeObject.gameObject.name == "CommunicationIcon" || nodeObject.gameObject.name == "CommunicationNode") {
                             Debug.Log("Communication mode");
+                            communicationSubNodes.SetActive(!communicationSubNodes.activeSelf);
                         } else if (nodeObject.gameObject.name == "SchedulingNode" || nodeObject.gameObject.name == "SchedulingIcon") {
                             Debug.Log("Scheduling mode");
+                            SchedulingSubNodes.SetActive(!SchedulingSubNodes.activeSelf);
                         }
                     }
                 }
