@@ -15,6 +15,8 @@ public class SliderController : MonoBehaviour
     public GameObject AIFindingPanel;
     public GameObject ResearchPanel;
     public GameObject ResearchSubnodes;
+    public GameObject CreationSubnodes;
+    public GameObject CreationText;
     public AudioSource audioSource;
     public AudioClip clip;
     int sec = 1;
@@ -36,6 +38,8 @@ public class SliderController : MonoBehaviour
             text2.SetActive(true);
             sliderGO.SetActive(false);
             audioSource.PlayOneShot(clip);
+            CreationSubnodes.SetActive(true);
+            CreationText.SetActive(true);
         }
     }
 
