@@ -192,7 +192,7 @@ public class JSONParserEdit : MonoBehaviour
         {
             foreach (Connection connection in connectionsRoot.new_connection) //checking for the field research nodes
             {
-                Debug.Log($"Node1: {connection.node1}, Node2: {connection.node2}, Edge Explanation: {connection.edge_exp}, Type: {connection.type}");
+                //Debug.Log($"Node1: {connection.node1}, Node2: {connection.node2}, Edge Explanation: {connection.edge_exp}, Type: {connection.type}");
 
                 if(connection.type=="p2f"){
                   // activate field
@@ -215,7 +215,6 @@ public class JSONParserEdit : MonoBehaviour
                       llmResearchFieldNode.SetActive(true);
                       LLMText.SetActive(true);
                       sphere1pos=llmResearchFieldNode.transform.position;
-                      Debug.Log(sphere1pos);
                   }
 
                   // check if paper exists
@@ -227,11 +226,11 @@ public class JSONParserEdit : MonoBehaviour
                   }
 
                   // if paper does not exist create node and connection
-                  else
+                  else if (!papersDictionary.ContainsKey(connection.node2))
                   {
-                      Debug.Log(sphere1pos);
                       Vector3 sphere2pos = InstantiateSphere(sphere1pos);
                       InstantiateConnection(sphere1pos,sphere2pos);
+                      AddToPapersDictionary(connection.node2, sphere2pos);
                   }
                 }
                 else if(connection.type=="p2p"){
@@ -295,19 +294,11 @@ public class JSONParserEdit : MonoBehaviour
 
         sphere.transform.parent = ParentModel.transform;
 
-        Debug.Log(spawnPointPosition);
-        Debug.Log(newPosition);
-        Debug.Log(a);
-        Debug.Log(b);
-        Debug.Log(c);
-
         return newPosition;
     }
 
     void InstantiateConnection(Vector3 position1, Vector3 position2)
     {
-        Debug.Log(position1);
-        Debug.Log(position2);
 
         // Create the connection instance
         GameObject connectionInstance = Instantiate(connectionPrefab);
@@ -333,4 +324,17 @@ public class JSONParserEdit : MonoBehaviour
         connectionInstance.transform.localScale = new Vector3(connectionInstance.transform.localScale.x, distance / 2f, connectionInstance.transform.localScale.z);
         connectionInstance.transform.parent = ParentModel.transform;
     }
+
+    public void AddToPapersDictionary(string key, Vector3 value)
+    {
+        if (papersDictionary.ContainsKey(key))
+        {
+            papersDictionary[key] = value; // Update existing entry
+        }
+        else
+        {
+            papersDictionary.Add(key, value); // Add new entry
+        }
+    }
+
 }
