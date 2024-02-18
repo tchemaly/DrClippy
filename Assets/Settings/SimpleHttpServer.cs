@@ -14,7 +14,7 @@ public class SimpleHttpServer : MonoBehaviour
     public GameObject selectMode;
     public GameObject level1;
     public GameObject level2;
-    private string postData = "default";
+    public string postData = "default";
     public string firstPushData = "";
     public string secondPushData = "";
 
@@ -57,7 +57,7 @@ public class SimpleHttpServer : MonoBehaviour
 
                     if (postData != null)
                     {
-                        poptext.text = postData;
+                        //poptext.text = postData;
                         if (firstPushData == "")
                         {
                             firstPushData = postData;

@@ -39,6 +39,10 @@ public class JSONParserEdit : MonoBehaviour
 
     private TMP_Text textComponent;
 
+    private string olddata = "";
+
+    public GameObject selectMode;
+
     [Serializable]
     public class ConnectionsRoot
     {
@@ -228,39 +232,26 @@ public class JSONParserEdit : MonoBehaviour
     void Start()
     {
 
-        networkGameObject = netWork.GetComponent<SimpleHttpServer>();
-
-
+        SimpleHttpServer networkGameObject = netWork.GetComponent<SimpleHttpServer>();
     }
 
     private void Update()
     {
-
-        if (networkGameObject.firstPushData != "" && firstDone == false)
+        SimpleHttpServer networkGameObject = netWork.GetComponent<SimpleHttpServer>();
+        if (networkGameObject.postData != "default" && olddata != networkGameObject.postData)
         //if (true)
         {
-            firstDone = true;
-            ParseJSON(jsonString);
+            olddata = networkGameObject.postData;
+            TextMeshPro poptext = selectMode.GetComponent<TextMeshPro>();
+            poptext.text = olddata;
+            ParseJSON(olddata);  
         }
-        else if (networkGameObject.secondPushData != "" && secondDone == false)
-        {
-            secondDone = true;
-            ParseJSON(newJsonString);
-        }
-
-
-            //if (networkGameObject.secondPushData != "")
-            ////if (true)
-            //{
-            //    ParseJSON(jsonString);
-            //}
-
         }
 
     void ParseJSON(string json)
     {
         // Ensure the correct JSON structure is being used for deserialization
-        ConnectionsRoot connectionsRoot = JsonUtility.FromJson<ConnectionsRoot>(json);
+        ConnectionsRoot connectionsRoot = JsonUtility.FromJson<ConnectionsRoot>(json.ToString());
         if (connectionsRoot != null && connectionsRoot.new_connection != null)
         {
             foreach (Connection connection in connectionsRoot.new_connection) //checking for the field research nodes
