@@ -15,7 +15,7 @@ Collaborative and Interactive: Dr. Clippy is your AI assistant and research part
 ![ezgif-4-26af7c98d6](https://github.com/tchemaly/DrClippy/assets/47718813/08c2125c-e7e0-4474-a988-c1609a2a4f73)
 
 # Built With:
- Spatial Computing Technology
+- Spatial Computing Technology
 - Postman
 - Unity
 - HTML, JavaScript, CSS
