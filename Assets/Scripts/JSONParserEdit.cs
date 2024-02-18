@@ -184,6 +184,10 @@ public class JSONParserEdit : MonoBehaviour
         ParseJSON(jsonString);
     }
 
+    void Update(){
+      
+    }
+
     void ParseJSON(string json)
     {
         // Ensure the correct JSON structure is being used for deserialization
