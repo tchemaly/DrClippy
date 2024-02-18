@@ -9,5 +9,7 @@ Here’s how Dr. Clippy stands out:
 Personalized Discovery: Dr. Clippy recommends academic papers and resources tailored to your knowledge base and gaps.
 Visual Knowledge Mapping: Dr. Clippy visualizes how new information slots into your existing knowledge, highlighting connections and sparking innovation through a spatial 3D mind map.
 Collaborative and Interactive: Dr. Clippy is your AI assistant and research partner that you can talk to. Beyond solo research, Dr. Clippy enables shared knowledge building with your research colleagues. Edit, expand, and share collective wisdom in a mixed reality space powered by Apple Vision Pro.
-![Spatial Browser Experience](https://github.com/tchemaly/DrClippy/assets/47718813/c081f5a0-cd2d-4ebc-9da1-864579fff375)
+
 ![logo](https://github.com/tchemaly/DrClippy/assets/47718813/71b6cb32-e498-49c3-bd1a-0d151f8d5249)
+![Spatial Browser Experience](https://github.com/tchemaly/DrClippy/assets/47718813/c081f5a0-cd2d-4ebc-9da1-864579fff375)
+![ezgif-4-26af7c98d6](https://github.com/tchemaly/DrClippy/assets/47718813/08c2125c-e7e0-4474-a988-c1609a2a4f73)
