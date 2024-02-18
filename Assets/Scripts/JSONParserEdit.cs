@@ -30,6 +30,8 @@ public class JSONParserEdit : MonoBehaviour
 
     private Vector3 sphere1pos=new Vector3(0f,0f,0f);
 
+    public GameObject netWork;
+
     [Serializable]
     public class ConnectionsRoot
     {
@@ -45,8 +47,45 @@ public class JSONParserEdit : MonoBehaviour
         public string type;
     }
 
+    //private string newJsonString = JsonUtility.ToJson();;
+
+    private string newjsonString = @"{
+    ""new_connection"": [
+        {
+            ""node1"": ""Education"",
+            ""node2"": ""Augmented Reality in Education: An Overview of Twenty-Five Years of Research level 2"",
+            ""edge_exp"": ""VR technology enhancing remote higher education learning experiences"",
+            ""type"": ""p2f""
+        },
+        {
+            ""node1"": ""VR"",
+            ""node2"": ""Augmented Reality and Virtual Reality Displays: Emerging Technologies and Future Perspectives level 2"",
+            ""edge_exp"": ""Enhancing remote education through VR technology"",
+            ""type"": ""p2f""
+        },
+        {
+            ""node1"": ""VR"",
+            ""node2"": ""A Review of the Application of Virtual Reality Technology in Higher Education level 2"",
+            ""edge_exp"": ""Enhancing remote education through VR innovations"",
+            ""type"": ""p2f""
+        },
+        {
+            ""node1"": ""VR"",
+            ""node2"": ""Research Into Improved Distance Learning Using VR Technology level 2"",
+            ""edge_exp"": ""VR technology enhancing remote and medical education."",
+            ""type"": ""p2f""
+        },
+        {
+            ""node1"": ""VR"",
+            ""node2"": ""Analyzing augmented reality (AR) and virtual reality (VR) recent development in education level 2"",
+            ""edge_exp"": ""VR technology enhancing remote higher education."",
+            ""type"": ""p2f""
+        },
+    ]
+    }";
+
     // The JSON string to parse
-    private string jsonString =
+    private string jsonString = 
 
     @"{
     ""new_connection"": [
@@ -181,7 +220,25 @@ public class JSONParserEdit : MonoBehaviour
 
     void Start()
     {
-        ParseJSON(jsonString);
+        
+
+        var networkGameObject = netWork.GetComponent<SimpleHttpServer>();
+        if (networkGameObject.firstPushData != "")
+        {
+            ParseJSON(jsonString);
+        }
+
+
+
+    }
+
+    private void Update()
+    {
+        var networkGameObject = netWork.GetComponent<SimpleHttpServer>();
+        if (networkGameObject.secondPushData != "")
+        {
+            ParseJSON(newjsonString);
+        }
     }
 
     void ParseJSON(string json)

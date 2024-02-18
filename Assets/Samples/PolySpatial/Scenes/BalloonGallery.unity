@@ -887,6 +887,8 @@ MonoBehaviour:
   selectMode: {fileID: 3534709251881707642}
   level1: {fileID: 6676756586614100639}
   level2: {fileID: 3534709251881707642}
+  firstPushData: 
+  secondPushData: 
 --- !u!1 &150266386
 GameObject:
   m_ObjectHideFlags: 0
@@ -7724,6 +7726,7 @@ MonoBehaviour:
     type: 3}
   connectionPrefab: {fileID: 8246597852473406191, guid: 6b875ba093af24d9c80ffb17a2d1559c,
     type: 3}
+  netWork: {fileID: 113890888}
 --- !u!1 &1214643334
 GameObject:
   m_ObjectHideFlags: 0
