@@ -23,12 +23,17 @@ public class JSONParserEdit : MonoBehaviour
     private float b=0;
     private float c=0;
 
+    private bool firstDone = false;
+    private bool secondDone = false;
+
     private GameObject[] spheres = new GameObject[2];
     private GameObject connectionInstance;
 
     private Dictionary<string, Vector3> papersDictionary = new Dictionary<string, Vector3>();
 
     private Vector3 sphere1pos=new Vector3(0f,0f,0f);
+
+    private SimpleHttpServer networkGameObject;
 
     public GameObject netWork;
 
@@ -49,7 +54,7 @@ public class JSONParserEdit : MonoBehaviour
 
     //private string newJsonString = JsonUtility.ToJson();;
 
-    private string newjsonString = @"{
+    private string newJsonString = @"{
     ""new_connection"": [
         {
             ""node1"": ""Education"",
@@ -80,7 +85,7 @@ public class JSONParserEdit : MonoBehaviour
             ""node2"": ""Analyzing augmented reality (AR) and virtual reality (VR) recent development in education level 2"",
             ""edge_exp"": ""VR technology enhancing remote higher education."",
             ""type"": ""p2f""
-        },
+        }
     ]
     }";
 
@@ -220,25 +225,34 @@ public class JSONParserEdit : MonoBehaviour
 
     void Start()
     {
-        
 
-        var networkGameObject = netWork.GetComponent<SimpleHttpServer>();
-        if (networkGameObject.firstPushData != "")
-        {
-            ParseJSON(jsonString);
-        }
-
+        networkGameObject = netWork.GetComponent<SimpleHttpServer>();
 
 
     }
 
     private void Update()
     {
-        var networkGameObject = netWork.GetComponent<SimpleHttpServer>();
-        if (networkGameObject.secondPushData != "")
+
+        if (networkGameObject.firstPushData != "" && firstDone == false)
+        //if (true)
         {
-            ParseJSON(newjsonString);
+            firstDone = true;
+            ParseJSON(jsonString);
         }
+        else if (networkGameObject.secondPushData != "" && secondDone == false)
+        {
+            secondDone = true;
+            ParseJSON(newJsonString);
+        }
+
+       
+        //if (networkGameObject.secondPushData != "")
+        ////if (true)
+        //{
+        //    ParseJSON(jsonString);
+        //}
+
     }
 
     void ParseJSON(string json)
