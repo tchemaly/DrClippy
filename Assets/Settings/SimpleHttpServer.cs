@@ -54,6 +54,7 @@ public class SimpleHttpServer : MonoBehaviour
                     {
                         poptext.text = postData;
                         level1.SetActive(true);
+                        level2.SetActive(true);
                     }
                     else
                     {
