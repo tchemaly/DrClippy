@@ -32,6 +32,8 @@ public class JSONParserEdit : MonoBehaviour
 
     public GameObject netWork;
 
+    private TMP_Text textComponent;
+
     [Serializable]
     public class ConnectionsRoot
     {
@@ -80,12 +82,12 @@ public class JSONParserEdit : MonoBehaviour
             ""node2"": ""Analyzing augmented reality (AR) and virtual reality (VR) recent development in education level 2"",
             ""edge_exp"": ""VR technology enhancing remote higher education."",
             ""type"": ""p2f""
-        },
+        }
     ]
     }";
 
     // The JSON string to parse
-    private string jsonString = 
+    private string jsonString =
 
     @"{
     ""new_connection"": [
@@ -220,26 +222,35 @@ public class JSONParserEdit : MonoBehaviour
 
     void Start()
     {
-        
 
-        var networkGameObject = netWork.GetComponent<SimpleHttpServer>();
-        if (networkGameObject.firstPushData != "")
-        {
-            ParseJSON(jsonString);
-        }
-
+        networkGameObject = netWork.GetComponent<SimpleHttpServer>();
 
 
     }
 
     private void Update()
     {
-        var networkGameObject = netWork.GetComponent<SimpleHttpServer>();
-        if (networkGameObject.secondPushData != "")
+
+        if (networkGameObject.firstPushData != "" && firstDone == false)
+        //if (true)
         {
-            ParseJSON(newjsonString);
+            firstDone = true;
+            ParseJSON(jsonString);
         }
-    }
+        else if (networkGameObject.secondPushData != "" && secondDone == false)
+        {
+            secondDone = true;
+            ParseJSON(newJsonString);
+        }
+
+
+            //if (networkGameObject.secondPushData != "")
+            ////if (true)
+            //{
+            //    ParseJSON(jsonString);
+            //}
+
+        }
 
     void ParseJSON(string json)
     {
@@ -285,7 +296,7 @@ public class JSONParserEdit : MonoBehaviour
                   // if paper does not exist create node and connection
                   else if (!papersDictionary.ContainsKey(connection.node2))
                   {
-                      Vector3 sphere2pos = InstantiateSphere(sphere1pos);
+                      Vector3 sphere2pos = InstantiateSphere(sphere1pos,connection.node2);
                       InstantiateConnection(sphere1pos,sphere2pos);
                       AddToPapersDictionary(connection.node2, sphere2pos);
                   }
@@ -314,7 +325,7 @@ public class JSONParserEdit : MonoBehaviour
         }
     }
 
-    Vector3 InstantiateSphere(Vector3 spawnPointPosition)
+    Vector3 InstantiateSphere(Vector3 spawnPointPosition, string paperTitle)
     {
         // Update the spawn point
         // Randomly choose between positive and negative for 'a'
@@ -350,6 +361,9 @@ public class JSONParserEdit : MonoBehaviour
         GameObject sphere = Instantiate(prefabToInstantiate, newPosition, Quaternion.identity);
 
         sphere.transform.parent = ParentModel.transform;
+
+        textComponent = sphere.GetComponentInChildren<TMP_Text>();
+        textComponent.text = paperTitle;
 
         return newPosition;
     }
