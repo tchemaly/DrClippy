@@ -1,14 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-
-
-
 public class JSONParser : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject educationResearchFieldNode;
+    public GameObject vrResearchFieldNode;
+    public GameObject llmResearchFieldNode;
+
+    public GameObject VRText;
+    public GameObject EducationText;
+    public GameObject LLMText;
+
+    public GameObject paper1Node;
+    public GameObject p1Education;
+    public GameObject p1VR;
+    public GameObject p1LLM;
+
+    public GameObject paper2Node;
+    public GameObject p2Education;
+    public GameObject p2VR;
+    public GameObject p2LLM;
+
+    public GameObject paper3Node;
+    public GameObject p3Education;
+    public GameObject p3VR;
+    public GameObject p3LLM;
+
+    public GameObject Paper1Text;
+    public GameObject Paper2Text;
+    public GameObject Paper3Text;
+
+    
+
+    
+
+    
 
     [Serializable]
     public class ConnectionsRoot
@@ -24,22 +50,43 @@ public class JSONParser : MonoBehaviour
         public string edge_exp;
     }
 
+    // The JSON string to parse
+    private string jsonString =
+    //    @"{
+    //    ""new_connection"": [
+    //        {
+    //            ""node1"": ""Topic: Topics in Large Language Models (LLM)"",
+    //            ""node2"": ""Title: A Survey of Large Language Models"",
+    //            ""edge_exp"": ""Reviewing advancements and applications in LLMs.""
+    //        },
+    //        {
+    //            ""node1"": ""Topic: Topics in Large Language Models (LLM)"",
+    //            ""node2"": ""Title: A Survey of Large Language Models"",
+    //            ""edge_exp"": ""Summarizing advancements and applications of LLMs""
+    //        },
+    //        {
+    //            ""node1"": ""Topic: Topics in Large Language Models (LLM)"",
+    //            ""node2"": ""Title: Theory of Mind May Have Spontaneously Emerged in Large Language Models\n"",
+    //            ""edge_exp"": ""LLMs developing Theory of Mind capabilities""
+    //        }
+    //    ]
+    //}";
 
-    private string jsonString = @"{
+    @"{
         ""new_connection"": [
             {
-                ""node1"": ""Topic: Topics in Large Language Models (LLM)"",
-                ""node2"": ""Title: A Survey of Large Language Models"",
+                ""node1"": ""LLM"",
+                ""node2"": ""A Survey of Large Language Models"",
                 ""edge_exp"": ""Reviewing advancements and applications in LLMs.""
             },
             {
-                ""node1"": ""Topic: Topics in Large Language Models (LLM)"",
-                ""node2"": ""Title: A Survey of Large Language Models"",
-                ""edge_exp"": ""Summarizing advancements and applications of LLMs""
+                ""node1"": ""VR"",
+                ""node2"": ""A Survey of VR"",
+                ""edge_exp"": ""Summarizing advancements and applications of VR""
             },
             {
-                ""node1"": ""Topic: Topics in Large Language Models (LLM)"",
-                ""node2"": ""Title: Theory of Mind May Have Spontaneously Emerged in Large Language Models\n"",
+                ""node1"": ""Education"",
+                ""node2"": ""Theory of Mind May Have Spontaneously Emerged in Education\n"",
                 ""edge_exp"": ""LLMs developing Theory of Mind capabilities""
             }
         ]
@@ -47,21 +94,25 @@ public class JSONParser : MonoBehaviour
 
     void Start()
     {
-        parseJSON(jsonString);
+        ParseJSON(jsonString);
     }
 
-    void parseJSON(string json)
+    void ParseJSON(string json)
     {
-        ConnectionsRoot connectionsRoot = JsonUtility.FromJson<ConnectionsRoot>("{\"new_connection\":" + json + "}");
-        foreach (Connection connection in connectionsRoot.new_connection)
+        // Ensure the correct JSON structure is being used for deserialization
+        ConnectionsRoot connectionsRoot = JsonUtility.FromJson<ConnectionsRoot>(json);
+        if (connectionsRoot != null && connectionsRoot.new_connection != null)
         {
-            Debug.Log($"Node1: {connection.node1}, Node2: {connection.node2}, Edge Explanation: {connection.edge_exp}");
-        }
-    }
+            foreach (Connection connection in connectionsRoot.new_connection)
+            {
+                Debug.Log($"Node1: {connection.node1}, Node2: {connection.node2}, Edge Explanation: {connection.edge_exp}");
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to parse JSON.");
+        }
     }
 }
