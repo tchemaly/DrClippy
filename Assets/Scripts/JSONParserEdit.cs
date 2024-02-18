@@ -23,12 +23,17 @@ public class JSONParserEdit : MonoBehaviour
     private float b=0;
     private float c=0;
 
+    private bool firstDone = false;
+    private bool secondDone = false;
+
     private GameObject[] spheres = new GameObject[2];
     private GameObject connectionInstance;
 
     private Dictionary<string, Vector3> papersDictionary = new Dictionary<string, Vector3>();
 
     private Vector3 sphere1pos=new Vector3(0f,0f,0f);
+
+    private SimpleHttpServer networkGameObject;
 
     public GameObject netWork;
 
@@ -51,7 +56,7 @@ public class JSONParserEdit : MonoBehaviour
 
     //private string newJsonString = JsonUtility.ToJson();;
 
-    private string newjsonString = @"{
+    private string newJsonString = @"{
     ""new_connection"": [
         {
             ""node1"": ""Education"",
