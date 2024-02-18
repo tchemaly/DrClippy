@@ -15,6 +15,11 @@ public class SimpleHttpServer : MonoBehaviour
     public GameObject level1;
     public GameObject level2;
     private string postData = "default";
+    public string firstPushData = "";
+    public string secondPushData = "";
+
+
+
 
     void Start()
     {
@@ -24,8 +29,8 @@ public class SimpleHttpServer : MonoBehaviour
         listenerThread = new Thread(StartListener);
         listenerThread.Start();
         Debug.Log("Server started.");
-        TextMeshPro poptext = selectMode.GetComponent<TextMeshPro>();
-        poptext.text = postData;
+        //TextMeshPro poptext = selectMode.GetComponent<TextMeshPro>();
+        //poptext.text = postData;
 
 
     }
@@ -53,6 +58,13 @@ public class SimpleHttpServer : MonoBehaviour
                     if (postData != null)
                     {
                         poptext.text = postData;
+                        if (firstPushData == "")
+                        {
+                            firstPushData = postData;
+                        }
+                        else {
+                            secondPushData = postData;
+                        }
                         level1.SetActive(true);
                         level2.SetActive(true);
                     }
