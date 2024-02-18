@@ -13,3 +13,16 @@ Collaborative and Interactive: Dr. Clippy is your AI assistant and research part
 ![logo](https://github.com/tchemaly/DrClippy/assets/47718813/71b6cb32-e498-49c3-bd1a-0d151f8d5249)
 ![Spatial Browser Experience](https://github.com/tchemaly/DrClippy/assets/47718813/c081f5a0-cd2d-4ebc-9da1-864579fff375)
 ![ezgif-4-26af7c98d6](https://github.com/tchemaly/DrClippy/assets/47718813/08c2125c-e7e0-4474-a988-c1609a2a4f73)
+
+# Built With:
+ Spatial Computing Technology
+- Postman
+- Unity
+- HTML, JavaScript, CSS
+- Chroma
+- Google Search API & Google Scholar API
+- LangChain
+- Flask
+- Multi-threading
+- OpenAI Embeddings
+- Unity-Polyspatial
